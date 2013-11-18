@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Name=HAP_Android
+Exec=/usr/bin/single-instance /opt/HAP_Android/bin/HAP_Android
+Icon=/usr/share/icons/hicolor/80x80/apps/HAP_Android80.png
+X-Window-Icon=
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable

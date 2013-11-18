@@ -1,0 +1,7 @@
+config settings
+        option serialport '/dev/ttyUSB0'
+        option hostname 'Supperwir'
+        option udp_key_high     '0c2ad4a4'
+        option udp_key_low      'acb9f023'
+        option udp_port '45454'
+~

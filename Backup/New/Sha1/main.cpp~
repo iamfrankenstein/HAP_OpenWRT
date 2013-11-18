@@ -1,0 +1,6 @@
+#include <SHA1.h>
+
+int main()
+{
+    void Reset();
+}

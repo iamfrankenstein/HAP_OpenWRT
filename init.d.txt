@@ -1,0 +1,47 @@
+
+#!/bin/sh /etc/rc.common
+
+START=96
+
+
+## Fill in name of program here.
+PROG="comserverd"
+PROG_PATH="/root/" ## Not need, but sometimes helpful (if $PROG resides in /opt for example).
+PROG_COMPATH="$(uci get comserver.@settings[0].serialport)"
+PROG_HOSTNAME="$(uci get comserver.@settings[0].hostname)"
+PROG_KEY_HIGH="$(uci get comserver.@settings[0].udp_key_high)"
+PROG_KEY_LOW="$(uci get comserver.@settings[0].udp_key_low)"
+PROG_KEY="$PROG_KEY_HIGH $PROG_KEY_LOW"
+PROG_UDP="$(uci get comserver.@settings[0].udp_port)"
+
+PROG_ARGS="$PROG_COMPATH  $PROG_HOSTNAME $PROG_KEY $PROG_UDP"
+PID_PATH="/var/run/"
+
+start() {
+    if [ -e "$PID_PATH/$PROG.pid" ]; then
+        ## Program is running, exit with error.
+        echo "Error! $PROG is currently running!" 1>&2
+        exit 1
+    else
+        ## Change from /dev/null to something like /var/log/$PROG if you want to save output.
+            $PROG_PATH/$PROG $PROG_ARGS > /dev/zero
+        echo $PROG_PATH/$PROG $PROG_ARGS
+        echo "$PROG started"
+        touch "$PID_PATH/$PROG.pid"
+    fi
+}
+
+stop() {
+    if [ -e "$PID_PATH/$PROG.pid" ]; then
+        ## Program is running, so stop it
+        killall $PROG
+
+        rm "$PID_PATH/$PROG.pid"
+
+        echo "$PROG stopped"
+    else
+        ## Program is not running, exit with error.
+        echo "Error! $PROG not started!" 1>&2
+        exit 1
+    fi
+}

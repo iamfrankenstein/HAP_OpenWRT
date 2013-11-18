@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>qml/HAP_Android/ButtonM.qml</file>
+        <file>qml/HAP_Android/main.qml</file>
+        <file>qml/HAP_Android/ButtonExit.qml</file>
+        <file>qml/HAP_Android/SwitchRF.qml</file>
+    </qresource>
+</RCC>
